@@ -1,48 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Menu, Form } from "semantic-ui-react";
-import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 function LogIn() {
-  const apiUrl = `https://todoo.5xcamp.us`;
-  const navigate = useNavigate();
+  const { logIn } = useAuth();
   const [activeItem, setActiveItem] = useState("signup");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function handleSubmit() {
-    if (activeItem === "signup") {
-      axios
-        .post(`${apiUrl}/users`, {
-          user: {
-            email: email,
-            password: password,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    } else if (activeItem === "signin") {
-      axios
-        .post(`${apiUrl}/users/sign_in`, {
-          user: {
-            email: email,
-            password: password,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem("token", res.headers.authorization);
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
+    logIn(email, password, activeItem === "signup");
   }
   return (
     <>
