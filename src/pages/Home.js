@@ -1,5 +1,5 @@
 function Home() {
-  return 123;
+  return <>You are trapped!</>;
 }
 
 export default Home;
