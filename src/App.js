@@ -8,7 +8,7 @@ import LogIn from "./pages/LogIn";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/side-project1-byReact/">
       <AuthProvider>
         <Container>
           <Header />
